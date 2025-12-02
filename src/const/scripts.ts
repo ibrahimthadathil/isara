@@ -1,0 +1,16 @@
+export const scripts = [
+    "/vendor/swiper.min.js",
+    "/vendor/leaflet.min.js",
+    "/vendor/vanilla-infinite-marquee.min.js",
+    "/vendor/split-text.min.js",
+    "/vendor/gsap.min.js",
+    "/vendor/scroll-trigger.min.js",
+    "/vendor/draw-svg.min.js",
+    "/vendor/motionpathplugin.min.js",
+    "/vendor/lenis.min.js",
+    "/vendor/springer.min.js",
+    "/vendor/number-counter.js",
+    "/vendor/stack-card.min.js",
+    "/assets/main.js",
+    "/assets/custom.js",
+];
