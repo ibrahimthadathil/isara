@@ -1,0 +1,63 @@
+#root {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  padding: 0;
+  /* text-align: center; */
+}
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  /* ensure a tiny extra gap so the heading is not glued to the header */
+  scroll-margin-top: calc(var(--header-offset, 0px) + 20px);
+}
+
+.cta-gradient,
+[data-ns-animate],
+.fixed,
+.sticky,
+.header-one {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Prevent layout shifts on scroll */
+html,
+body {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* DON'T apply will-change to many elements at once.
+Only enable on the few elements that actually need it. */
+.cta-gradient,
+.header-one,
+.fixed,
+.sticky {
+  /* keep any single element optimizations; avoid setting will-change globally */
+  will-change: transform, opacity;
+}
+
+/* Avoid forcing layer creation on many small elements */
+/* remove global translateZ hacks on many selectors if present in your CSS */
+/* ensure images use object-fit and aren't causing layout thrashing */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-rotate-slow {
+  animation: rotate-slow 60s linear infinite;
+  transform-origin: center center;
+}
