@@ -1,13 +1,17 @@
-import { Outlet } from "react-router-dom"
+import Footer from "../global/footer";
+import GlobalHeader from "../global/header";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-   <>
-   <main>
-    <Outlet/>
-   </main>
-   </>
-  )
-}
+    <>
+      <GlobalHeader />
+      <main>
+        <Outlet />
+        <Footer />
+      </main>
+    </>
+  );
+};
 
-export default Layout
+export default Layout;
