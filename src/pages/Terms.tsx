@@ -2,6 +2,7 @@
 const Terms = () => {
   return (
     <div>
+      term
     </div>
   )
 }
