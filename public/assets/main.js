@@ -14,148 +14,148 @@ function init() {
   }
   /** --- end helper --- **/
 
-  const accordionAnimation = {
-    accordionItems: null,
-    activeItem: null,
-    init() {
-      this.accordion = document.querySelector(".accordion");
-      this.accordionItems = document.querySelectorAll(".accordion-item");
-      this.activeItem = null;
-      this.accordionItems.forEach((item) => {
-        const action = item.querySelector(".accordion-action");
-        const content = item.querySelector(".accordion-content");
-        if (item.classList.contains("active-accordion")) {
-          content.classList.remove("hidden");
-          content.style.height = "auto";
-          this.activeItem = item;
-          this.setOpenState(item);
-        } else {
-          if (content) {
-            content.classList.add("hidden");
-          }
-        }
-        action.addEventListener("click", (e) => {
-          e.preventDefault();
-          if (this.activeItem && this.activeItem !== item) {
-            this.closeAccordion(this.activeItem);
-          }
-          if (this.activeItem === item) {
-            this.closeAccordion(item);
-            this.activeItem = null;
-          } else {
-            this.openAccordion(item);
-            this.activeItem = item;
-          }
-        });
-      });
-      this.initAnimation();
-    },
-    setOpenState(item) {
-      const plusIconSpans = item.querySelectorAll(".accordion-plus-icon span");
-      const accordionArrow = item.querySelector(".accordion-arrow svg");
-      if (plusIconSpans.length > 0) {
-        plusIconSpans[1].style.transform = "rotate(90deg)";
-      }
-      if (accordionArrow) {
-        accordionArrow.style.transform = "rotate(180deg)";
-      }
-    },
-    initAnimation() {
-      this.accordionItems.forEach((item, index) => {
-        gsap.set(item, {
-          opacity: 0,
-          y: 50,
-          filter: "blur(20px)",
-          overflow: "hidden",
-        });
-        gsap.fromTo(
-          item,
-          {
-            opacity: 0,
-            y: 50,
-            filter: "blur(20px)",
-          },
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.5,
-            delay: index * 0.1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 90%",
-              end: "top 50%",
-              scrub: false,
-              once: true,
-            },
-          }
-        );
-      });
-    },
-    openAccordion(item) {
-      const content = item.querySelector(".accordion-content");
-      const plusIconSpans = item.querySelectorAll(".accordion-plus-icon span");
-      const accordionArrow = item.querySelector(".accordion-arrow svg");
-      content.classList.remove("hidden");
-      content.style.height = "auto";
-      const contentHeight = content.scrollHeight;
-      content.style.height = "0px";
-      gsap.to(content, {
-        height: contentHeight,
-        opacity: 1,
-        duration: 0.3,
-      });
-      if (plusIconSpans.length > 0) {
-        gsap.to(plusIconSpans[1], {
-          rotation: 90,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }
-      if (accordionArrow) {
-        gsap.to(accordionArrow, {
-          rotation: -180,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }
-    },
-    closeAccordion(item) {
-      const content = item.querySelector(".accordion-content");
-      const plusIconSpans = item.querySelectorAll(".accordion-plus-icon span");
-      const accordionArrow = item.querySelector(".accordion-arrow svg");
-      content.style.height = "auto";
-      const contentHeight = content.scrollHeight;
-      content.style.height = contentHeight + "px";
-      gsap.to(content, {
-        height: 0,
-        opacity: 0,
-        duration: 0.5,
-        onComplete: () => {
-          content.classList.add("hidden");
-          content.style.height = "0px";
-        },
-      });
-      if (plusIconSpans.length > 0) {
-        gsap.to(plusIconSpans[1], {
-          rotation: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-      }
-      if (accordionArrow) {
-        gsap.to(accordionArrow, {
-          rotation: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-      }
-    },
-  };
-  if (typeof window !== "undefined") {
-    accordionAnimation.init();
-  }
+  // const accordionAnimation = {
+  //   accordionItems: null,
+  //   activeItem: null,
+  //   init() {
+  //     this.accordion = document.querySelector(".accordion");
+  //     this.accordionItems = document.querySelectorAll(".accordion-item");
+  //     this.activeItem = null;
+  //     this.accordionItems.forEach((item) => {
+  //       const action = item.querySelector(".accordion-action");
+  //       const content = item.querySelector(".accordion-content");
+  //       if (item.classList.contains("active-accordion")) {
+  //         content.classList.remove("hidden");
+  //         content.style.height = "auto";
+  //         this.activeItem = item;
+  //         this.setOpenState(item);
+  //       } else {
+  //         if (content) {
+  //           content.classList.add("hidden");
+  //         }
+  //       }
+  //       action.addEventListener("click", (e) => {
+  //         e.preventDefault();
+  //         if (this.activeItem && this.activeItem !== item) {
+  //           this.closeAccordion(this.activeItem);
+  //         }
+  //         if (this.activeItem === item) {
+  //           this.closeAccordion(item);
+  //           this.activeItem = null;
+  //         } else {
+  //           this.openAccordion(item);
+  //           this.activeItem = item;
+  //         }
+  //       });
+  //     });
+  //     this.initAnimation();
+  //   },
+  //   setOpenState(item) {
+  //     const plusIconSpans = item.querySelectorAll(".accordion-plus-icon span");
+  //     const accordionArrow = item.querySelector(".accordion-arrow svg");
+  //     if (plusIconSpans.length > 0) {
+  //       plusIconSpans[1].style.transform = "rotate(90deg)";
+  //     }
+  //     if (accordionArrow) {
+  //       accordionArrow.style.transform = "rotate(180deg)";
+  //     }
+  //   },
+  //   initAnimation() {
+  //     this.accordionItems.forEach((item, index) => {
+  //       gsap.set(item, {
+  //         opacity: 0,
+  //         y: 50,
+  //         filter: "blur(20px)",
+  //         overflow: "hidden",
+  //       });
+  //       gsap.fromTo(
+  //         item,
+  //         {
+  //           opacity: 0,
+  //           y: 50,
+  //           filter: "blur(20px)",
+  //         },
+  //         {
+  //           opacity: 1,
+  //           y: 0,
+  //           filter: "blur(0px)",
+  //           duration: 0.5,
+  //           delay: index * 0.1,
+  //           ease: "power2.out",
+  //           scrollTrigger: {
+  //             trigger: item,
+  //             start: "top 90%",
+  //             end: "top 50%",
+  //             scrub: false,
+  //             once: true,
+  //           },
+  //         }
+  //       );
+  //     });
+  //   },
+  //   openAccordion(item) {
+  //     const content = item.querySelector(".accordion-content");
+  //     const plusIconSpans = item.querySelectorAll(".accordion-plus-icon span");
+  //     const accordionArrow = item.querySelector(".accordion-arrow svg");
+  //     content.classList.remove("hidden");
+  //     content.style.height = "auto";
+  //     const contentHeight = content.scrollHeight;
+  //     content.style.height = "0px";
+  //     gsap.to(content, {
+  //       height: contentHeight,
+  //       opacity: 1,
+  //       duration: 0.3,
+  //     });
+  //     if (plusIconSpans.length > 0) {
+  //       gsap.to(plusIconSpans[1], {
+  //         rotation: 90,
+  //         duration: 0.3,
+  //         ease: "power2.out",
+  //       });
+  //     }
+  //     if (accordionArrow) {
+  //       gsap.to(accordionArrow, {
+  //         rotation: -180,
+  //         duration: 0.3,
+  //         ease: "power2.out",
+  //       });
+  //     }
+  //   },
+  //   closeAccordion(item) {
+  //     const content = item.querySelector(".accordion-content");
+  //     const plusIconSpans = item.querySelectorAll(".accordion-plus-icon span");
+  //     const accordionArrow = item.querySelector(".accordion-arrow svg");
+  //     content.style.height = "auto";
+  //     const contentHeight = content.scrollHeight;
+  //     content.style.height = contentHeight + "px";
+  //     gsap.to(content, {
+  //       height: 0,
+  //       opacity: 0,
+  //       duration: 0.5,
+  //       onComplete: () => {
+  //         content.classList.add("hidden");
+  //         content.style.height = "0px";
+  //       },
+  //     });
+  //     if (plusIconSpans.length > 0) {
+  //       gsap.to(plusIconSpans[1], {
+  //         rotation: 0,
+  //         duration: 0.5,
+  //         ease: "power2.out",
+  //       });
+  //     }
+  //     if (accordionArrow) {
+  //       gsap.to(accordionArrow, {
+  //         rotation: 0,
+  //         duration: 0.5,
+  //         ease: "power2.out",
+  //       });
+  //     }
+  //   },
+  // };
+  // if (typeof window !== "undefined") {
+  //   // accordionAnimation.init();
+  // }
   const gsapRegister = () => {
     if (typeof gsap === "undefined") {
       console.error("GSAP is not loaded.");
@@ -444,99 +444,25 @@ function init() {
   if (typeof window !== "undefined") {
     gsapRegister();
   }
-  const headerAnimation = {
-    headerOne() {
-      const header = document.querySelector(".header-one");
-      if (header) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 100) {
-            header.style.transition = "all 0.5s ease-in-out";
-            header.classList.add("scroll-header");
-          } else {
-            header.classList.remove("scroll-header");
-          }
-        });
-      }
-    },
-    headerTwo() {
-      const header = document.querySelector(".header-two");
-      const headerBtn = document.querySelector(".header-btn");
-      if (header) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 150) {
-            header.style.transition = "all 0.5s ease-in-out";
-            header.classList.add("header-two-scroll");
-            headerBtn.classList.remove("btn-secondary");
-            headerBtn.classList.add("btn-white");
-          } else {
-            header.classList.remove("header-two-scroll");
-            headerBtn.classList.remove("btn-white");
-            headerBtn.classList.add("btn-secondary");
-          }
-        });
-      }
-    },
-    headerThree() {
-      const header = document.querySelector(".header-three");
-      if (header) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 100) {
-            header.style.transition = "all 0.5s ease-in-out";
-            header.classList.add("header-three-scroll");
-          } else {
-            header.classList.remove("header-three-scroll");
-          }
-        });
-      }
-    },
-    headerFour() {
-      const header = document.querySelector(".header-four");
-      if (header) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 100) {
-            header.style.transition = "all 0.5s ease-in-out";
-            header.classList.add("header-four-scroll");
-          } else {
-            header.classList.remove("header-four-scroll");
-          }
-        });
-      }
-    },
-    headerFive() {
-      const header = document.querySelector(".header-five");
-      if (header) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 25) {
-            header.style.transition = "all 0.5s ease-in-out";
-            header.classList.add("header-five-scroll");
-          } else {
-            header.classList.remove("header-five-scroll");
-          }
-        });
-      }
-    },
-    headerSix() {
-      const header = document.querySelector(".header-six");
-      if (header) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 100) {
-            header.style.transition = "all 0.5s ease-in-out";
-            header.classList.add("header-six-scroll");
-          } else {
-            header.classList.remove("header-six-scroll");
-          }
-        });
-      }
-    },
-  };
-  if (typeof window !== "undefined") {
-    headerAnimation.headerOne();
-    headerAnimation.headerTwo();
-    headerAnimation.headerThree();
-    headerAnimation.headerFour();
-    headerAnimation.headerFive();
-    headerAnimation.headerSix();
-  }
+  // const headerAnimation = {
+  //   headerOne() {
+  //     const header = document.querySelector(".header-one");
+  //     if (header) {
+  //       window.addEventListener("scroll", () => {
+  //         if (window.scrollY > 100) {
+  //           header.style.transition = "all 0.5s ease-in-out";
+  //           header.classList.add("scroll-header");
+  //         } else {
+  //           header.classList.remove("scroll-header");
+  //         }
+  //       });
+  //     }
+  //   },
+
+  // };
+  // if (typeof window !== "undefined") {
+  //   // headerAnimation.headerOne();
+  // }
   if (typeof window !== "undefined") {
     function infiniteMarquee1() {
       if (typeof InfiniteMarquee === "undefined") {
@@ -721,194 +647,194 @@ function init() {
       modalAnimation.init();
     }
   }
-  const sidebarAnimation = {
-    elements: null,
-    init() {
-      try {
-        this.cacheElements();
-        this.bindEvents();
-      } catch (error) {
-        console.error("Sidebar animation initialization failed:", error);
-      }
-    },
-    cacheElements() {
-      this.elements = {
-        navHamburger: document.querySelector(".nav-hamburger"),
-        navHamburgerClose: document.querySelector(".nav-hamburger-close"),
-        sidebar: document.querySelector(".sidebar"),
-        subMenu: document.querySelectorAll(".sub-menu"),
-      };
-    },
-    bindEvents() {
-      const { navHamburger, navHamburgerClose, subMenu } = this.elements;
-      if (navHamburger) {
-        navHamburger.addEventListener("click", () => {
-          this.elements.sidebar.classList.add("show-sidebar");
-          document.body.classList.add("overflow-hidden");
-        });
-      }
-      if (navHamburgerClose) {
-        navHamburgerClose.addEventListener("click", () => {
-          this.elements.sidebar.classList.remove("show-sidebar");
-          document.body.classList.remove("overflow-hidden");
-        });
-      }
-      subMenu.forEach((menu) => {
-        menu.addEventListener("click", () => {
-          menu.classList.toggle("active-menu");
-          menu.nextElementSibling.classList.toggle("hidden");
-          menu.children[1].classList.toggle("rotate-90");
-          subMenu.forEach((otherMenu) => {
-            if (otherMenu !== menu) {
-              otherMenu.nextElementSibling.classList.add("hidden");
-              otherMenu.children[1].classList.remove("rotate-90");
-              otherMenu.classList.remove("active-menu");
-            }
-          });
-        });
-      });
-    },
-  };
-  if (typeof window !== "undefined") {
-    sidebarAnimation.init();
-  }
-  const testimonials = [
-    {
-      name: "Jessica Lee",
-      position: "Head of customer Success",
-      image: "images/avatar/avatar-9.png",
-      quote:
-        "The investment insights are clear, easy to understand and follow. I love the automation and feel like I'm making real progress every day.",
-    },
-    {
-      name: "Mark Thompson",
-      position: "Marketing Director",
-      image: "images/avatar/avatar-10.png",
-      quote:
-        "This platform helps our team move faster, stay aligned, and reduce errors. It's a powerful tool that boosts productivity all around.",
-    },
-    {
-      name: "Amina Yusuf",
-      position: "Product Manager",
-      image: "images/avatar/avatar-11.png",
-      quote:
-        "Our planning is finally clear and consistent. I feel more confident in how my team executes tasks and reaches project goals on time.",
-    },
-    {
-      name: "Leo Chen",
-      position: "Founder, ScaleX",
-      image: "images/avatar/avatar-13.png",
-      quote:
-        "The design is clean and the interface is effortless to use. It saves time, improves clarity, and just makes everything run smoother.",
-    },
-    {
-      name: "John Doe",
-      position: "CEO",
-      image: "images/avatar/avatar-14.png",
-      quote:
-        "A great platform for managing projects with clarity and speed. It's intuitive, efficient, and keeps everyone on the same page easily.",
-    },
-  ];
-  const sliderAnimation = {
-    init() {
-      let currentIndex = 0;
-      const avatarImgs = document.querySelectorAll(".testimonial-avatar");
-      const quoteEl = document.querySelector("#testimonial-quote h3");
-      const nameEl = document.querySelector("#testimonial-info h4");
-      const positionEl = document.querySelector("#testimonial-info p");
-      if (avatarImgs.length < 5 || !quoteEl || !nameEl || !positionEl) {
-        return;
-      }
-      function updateAvatarImages() {
-        for (let i = 0; i < 5; i++) {
-          const avatarIndex =
-            (currentIndex + i - 2 + testimonials.length) % testimonials.length;
-          const testimonial = testimonials[avatarIndex];
-          const imgEl = avatarImgs[i];
-          if (!imgEl) continue;
-          imgEl.src = testimonial.image;
-          imgEl.alt = `${testimonial.name}'s avatar`;
-          gsap.fromTo(
-            imgEl,
-            {
-              opacity: 1,
-              scale: 1.1,
-            },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.4,
-              delay: i * 0.05,
-              ease: "power2.out",
-            }
-          );
-        }
-      }
-      function updateTextContent() {
-        const t = testimonials[currentIndex];
-        if (quoteEl) {
-          gsap.to(quoteEl, {
-            opacity: 0,
-            y: -10,
-            duration: 0.2,
-            onComplete: () => {
-              quoteEl.textContent = `"${t.quote}"`;
-              gsap.to(quoteEl, {
-                opacity: 1,
-                y: 0,
-                duration: 0.3,
-                ease: "power2.out",
-              });
-            },
-          });
-        }
-        if (nameEl) {
-          gsap.to(nameEl, {
-            opacity: 0,
-            y: 5,
-            duration: 0.2,
-            onComplete: () => {
-              nameEl.textContent = t.name;
-              gsap.to(nameEl, {
-                opacity: 1,
-                y: 0,
-                duration: 0.3,
-                ease: "power2.out",
-              });
-            },
-          });
-        }
-        if (positionEl) {
-          gsap.to(positionEl, {
-            opacity: 0,
-            y: 5,
-            duration: 0.2,
-            onComplete: () => {
-              positionEl.textContent = t.position;
-              gsap.to(positionEl, {
-                opacity: 1,
-                y: 0,
-                duration: 0.3,
-                ease: "power2.out",
-              });
-            },
-          });
-        }
-      }
-      function updateTestimonial() {
-        updateAvatarImages();
-        updateTextContent();
-      }
-      updateTestimonial();
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % testimonials.length;
-        updateTestimonial();
-      }, 3e3);
-    },
-  };
-  if (typeof window !== "undefined") {
-    sliderAnimation.init();
-  }
+  // const sidebarAnimation = {
+  //   elements: null,
+  //   init() {
+  //     try {
+  //       this.cacheElements();
+  //       this.bindEvents();
+  //     } catch (error) {
+  //       console.error("Sidebar animation initialization failed:", error);
+  //     }
+  //   },
+  //   cacheElements() {
+  //     this.elements = {
+  //       navHamburger: document.querySelector(".nav-hamburger"),
+  //       navHamburgerClose: document.querySelector(".nav-hamburger-close"),
+  //       sidebar: document.querySelector(".sidebar"),
+  //       subMenu: document.querySelectorAll(".sub-menu"),
+  //     };
+  //   },
+  //   bindEvents() {
+  //     const { navHamburger, navHamburgerClose, subMenu } = this.elements;
+  //     if (navHamburger) {
+  //       navHamburger.addEventListener("click", () => {
+  //         this.elements.sidebar.classList.add("show-sidebar");
+  //         document.body.classList.add("overflow-hidden");
+  //       });
+  //     }
+  //     if (navHamburgerClose) {
+  //       navHamburgerClose.addEventListener("click", () => {
+  //         this.elements.sidebar.classList.remove("show-sidebar");
+  //         document.body.classList.remove("overflow-hidden");
+  //       });
+  //     }
+  //     subMenu.forEach((menu) => {
+  //       menu.addEventListener("click", () => {
+  //         menu.classList.toggle("active-menu");
+  //         menu.nextElementSibling.classList.toggle("hidden");
+  //         menu.children[1].classList.toggle("rotate-90");
+  //         subMenu.forEach((otherMenu) => {
+  //           if (otherMenu !== menu) {
+  //             otherMenu.nextElementSibling.classList.add("hidden");
+  //             otherMenu.children[1].classList.remove("rotate-90");
+  //             otherMenu.classList.remove("active-menu");
+  //           }
+  //         });
+  //       });
+  //     });
+  //   },
+  // };
+  // if (typeof window !== "undefined") {
+  //   // sidebarAnimation.init();
+  // }
+  // const testimonials = [
+  //   {
+  //     name: "Jessica Lee",
+  //     position: "Head of customer Success",
+  //     image: "images/avatar/avatar-9.png",
+  //     quote:
+  //       "The investment insights are clear, easy to understand and follow. I love the automation and feel like I'm making real progress every day.",
+  //   },
+  //   {
+  //     name: "Mark Thompson",
+  //     position: "Marketing Director",
+  //     image: "images/avatar/avatar-10.png",
+  //     quote:
+  //       "This platform helps our team move faster, stay aligned, and reduce errors. It's a powerful tool that boosts productivity all around.",
+  //   },
+  //   {
+  //     name: "Amina Yusuf",
+  //     position: "Product Manager",
+  //     image: "images/avatar/avatar-11.png",
+  //     quote:
+  //       "Our planning is finally clear and consistent. I feel more confident in how my team executes tasks and reaches project goals on time.",
+  //   },
+  //   {
+  //     name: "Leo Chen",
+  //     position: "Founder, ScaleX",
+  //     image: "images/avatar/avatar-13.png",
+  //     quote:
+  //       "The design is clean and the interface is effortless to use. It saves time, improves clarity, and just makes everything run smoother.",
+  //   },
+  //   {
+  //     name: "John Doe",
+  //     position: "CEO",
+  //     image: "images/avatar/avatar-14.png",
+  //     quote:
+  //       "A great platform for managing projects with clarity and speed. It's intuitive, efficient, and keeps everyone on the same page easily.",
+  //   },
+  // ];
+  // const sliderAnimation = {
+  //   init() {
+  //     let currentIndex = 0;
+  //     const avatarImgs = document.querySelectorAll(".testimonial-avatar");
+  //     const quoteEl = document.querySelector("#testimonial-quote h3");
+  //     const nameEl = document.querySelector("#testimonial-info h4");
+  //     const positionEl = document.querySelector("#testimonial-info p");
+  //     if (avatarImgs.length < 5 || !quoteEl || !nameEl || !positionEl) {
+  //       return;
+  //     }
+  //     function updateAvatarImages() {
+  //       for (let i = 0; i < 5; i++) {
+  //         const avatarIndex =
+  //           (currentIndex + i - 2 + testimonials.length) % testimonials.length;
+  //         const testimonial = testimonials[avatarIndex];
+  //         const imgEl = avatarImgs[i];
+  //         if (!imgEl) continue;
+  //         imgEl.src = testimonial.image;
+  //         imgEl.alt = `${testimonial.name}'s avatar`;
+  //         gsap.fromTo(
+  //           imgEl,
+  //           {
+  //             opacity: 1,
+  //             scale: 1.1,
+  //           },
+  //           {
+  //             opacity: 1,
+  //             scale: 1,
+  //             duration: 0.4,
+  //             delay: i * 0.05,
+  //             ease: "power2.out",
+  //           }
+  //         );
+  //       }
+  //     }
+  //     function updateTextContent() {
+  //       const t = testimonials[currentIndex];
+  //       if (quoteEl) {
+  //         gsap.to(quoteEl, {
+  //           opacity: 0,
+  //           y: -10,
+  //           duration: 0.2,
+  //           onComplete: () => {
+  //             quoteEl.textContent = `"${t.quote}"`;
+  //             gsap.to(quoteEl, {
+  //               opacity: 1,
+  //               y: 0,
+  //               duration: 0.3,
+  //               ease: "power2.out",
+  //             });
+  //           },
+  //         });
+  //       }
+  //       if (nameEl) {
+  //         gsap.to(nameEl, {
+  //           opacity: 0,
+  //           y: 5,
+  //           duration: 0.2,
+  //           onComplete: () => {
+  //             nameEl.textContent = t.name;
+  //             gsap.to(nameEl, {
+  //               opacity: 1,
+  //               y: 0,
+  //               duration: 0.3,
+  //               ease: "power2.out",
+  //             });
+  //           },
+  //         });
+  //       }
+  //       if (positionEl) {
+  //         gsap.to(positionEl, {
+  //           opacity: 0,
+  //           y: 5,
+  //           duration: 0.2,
+  //           onComplete: () => {
+  //             positionEl.textContent = t.position;
+  //             gsap.to(positionEl, {
+  //               opacity: 1,
+  //               y: 0,
+  //               duration: 0.3,
+  //               ease: "power2.out",
+  //             });
+  //           },
+  //         });
+  //       }
+  //     }
+  //     function updateTestimonial() {
+  //       updateAvatarImages();
+  //       updateTextContent();
+  //     }
+  //     updateTestimonial();
+  //     setInterval(() => {
+  //       currentIndex = (currentIndex + 1) % testimonials.length;
+  //       updateTestimonial();
+  //     }, 3e3);
+  //   },
+  // };
+  // if (typeof window !== "undefined") {
+  //   // sliderAnimation.init();
+  // }
   const svgDraw = () => {
     gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
     const selectors = ["#svg-one", "#svg-two", "#svg-three"];
@@ -2485,25 +2411,25 @@ function init() {
     // initRevealElements();
   }
   let lenis;
-  const smoothScrolling = () => {
-    const isMobile =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      ) ||
-      window.innerWidth <= 768 ||
-      "ontouchstart" in window;
-    if (!isMobile) {
-      lenis = new Lenis({
-        lerp: 0.1,
-        smoothWheel: true,
-      });
-      lenis.on("scroll", () => ScrollTrigger.update());
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1e3);
-      });
-      gsap.ticker.lagSmoothing(0);
-    }
-  };
+  // const smoothScrolling = () => {
+  //   const isMobile =
+  //     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  //       navigator.userAgent
+  //     ) ||
+  //     window.innerWidth <= 768 ||
+  //     "ontouchstart" in window;
+  //   if (!isMobile) {
+  //     lenis = new Lenis({
+  //       lerp: 0.1,
+  //       smoothWheel: true,
+  //     });
+  //     lenis.on("scroll", () => ScrollTrigger.update());
+  //     gsap.ticker.add((time) => {
+  //       lenis.raf(time * 1e3);
+  //     });
+  //     gsap.ticker.lagSmoothing(0);
+  //   }
+  // };
   const resetTocItems = (sidebarList) => {
     const allListItems = sidebarList.querySelectorAll("li");
     allListItems.forEach((item) => {
@@ -2541,44 +2467,44 @@ function init() {
     resetTocItems(sidebarList);
     activateTocItem(clickedItem);
   };
-  const lenisSmoothScrollLinks = () => {
-    const lenisTargetElements = document.querySelectorAll(".lenis-scroll-to");
-    const sidebarList = document.querySelector(
-      ".table-of-contents .table-of-list"
-    );
-    lenisTargetElements.forEach((ele) => {
-      ele.addEventListener("click", function (e) {
-        e.preventDefault();
-        const target = ele.getAttribute("href");
-        if (sidebarList) {
-          const clickedItem = ele.closest("li");
-          if (clickedItem) {
-            handleTocItemClick(clickedItem, sidebarList);
-          }
-        }
-        if (target) {
-          if (lenis) {
-            lenis.scrollTo(target, {
-              offset: -100,
-              duration: 1.7,
-              easing: (t) => 1 - Math.pow(1 - t, 3),
-            });
-          } else {
-            const targetElement = document.querySelector(target);
-            if (targetElement) {
-              targetElement.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-              setTimeout(() => {
-                window.scrollBy(0, -100);
-              }, 100);
-            }
-          }
-        }
-      });
-    });
-  };
+  // const lenisSmoothScrollLinks = () => {
+  //   const lenisTargetElements = document.querySelectorAll(".lenis-scroll-to");
+  //   const sidebarList = document.querySelector(
+  //     ".table-of-contents .table-of-list"
+  //   );
+  //   lenisTargetElements.forEach((ele) => {
+  //     ele.addEventListener("click", function (e) {
+  //       e.preventDefault();
+  //       const target = ele.getAttribute("href");
+  //       if (sidebarList) {
+  //         const clickedItem = ele.closest("li");
+  //         if (clickedItem) {
+  //           handleTocItemClick(clickedItem, sidebarList);
+  //         }
+  //       }
+  //       if (target) {
+  //         if (lenis) {
+  //           lenis.scrollTo(target, {
+  //             offset: -100,
+  //             duration: 1.7,
+  //             easing: (t) => 1 - Math.pow(1 - t, 3),
+  //           });
+  //         } else {
+  //           const targetElement = document.querySelector(target);
+  //           if (targetElement) {
+  //             targetElement.scrollIntoView({
+  //               behavior: "smooth",
+  //               block: "start",
+  //             });
+  //             setTimeout(() => {
+  //               window.scrollBy(0, -100);
+  //             }, 100);
+  //           }
+  //         }
+  //       }
+  //     });
+  //   });
+  // };
   const handleTocListClicks = () => {
     const sidebarList = document.querySelector(
       ".table-of-contents .table-of-list"
@@ -2654,8 +2580,8 @@ function init() {
   };
   if (typeof window !== "undefined") {
     console.log("window is defined handleTocListClicks ✅✅✅");
-    smoothScrolling();
-    lenisSmoothScrollLinks();
+    // smoothScrolling();
+    // lenisSmoothScrollLinks();
     handleTocListClicks();
     numberFn();
     leaflet.init();

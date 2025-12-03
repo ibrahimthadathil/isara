@@ -1,20 +1,74 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { faqData } from "../../../const/home";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
+gsap.registerPlugin(ScrollTrigger);
 
 const FaqSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const toggleAccordion = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index);
+    setActiveIndex((prev) => (prev === index ? null : index));
   };
+
+  useEffect(() => {
+    // Scroll fade-in animation
+    itemRefs.current.forEach((item, index) => {
+      if (!item) return;
+
+      gsap.fromTo(
+        item,
+        { opacity: 0, y: 50, filter: "blur(20px)" },
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.5,
+          delay: index * 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 90%",
+            scrub: false,
+            once: true,
+          },
+        }
+      );
+    });
+  }, []);
+
+  useEffect(() => {
+    // Animate open/close using GSAP
+    contentRefs.current.forEach((content, index) => {
+      if (!content) return;
+
+      if (index === activeIndex) {
+        const h = content.scrollHeight;
+        gsap.fromTo(
+          content,
+          { height: 0, opacity: 0 },
+          { height: h, opacity: 1, duration: 0.3, ease: "power2.out" }
+        );
+      } else {
+        gsap.to(content, {
+          height: 0,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }
+    });
+  }, [activeIndex]);
 
   return (
     <section
       id="faq"
       className="relative pb-14 pt-14 md:pb-16 md:pt-16 lg:pb-[0px] lg:pt-[0px] xl:pb-[0px] xl:pt-[0px] overflow-hidden"
     >
+      {/* top gradient */}
       <figure
         data-ns-animate
         data-delay="0.2"
@@ -49,8 +103,7 @@ const FaqSection: React.FC = () => {
             className="lg:max-w-[620px] mx-auto"
           >
             By offering concise and informative responses, this section helps
-            users find solutions without the need to contact customer support,
-            saving time
+            users find solutions without the need to contact customer support.
           </p>
         </div>
 
@@ -63,10 +116,12 @@ const FaqSection: React.FC = () => {
             <div
               key={index}
               className="accordion-item group bg-white dark:bg-background-5 border border-stroke-4 dark:border-stroke-8 rounded-[8px] px-6 overflow-hidden relative z-10"
+              ref={(el: null) => (itemRefs.current[index] = el!)}
             >
               <div className="-z-10 absolute -top-[150%] sm:-top-[220%] md:-top-[300%] lg:-top-[190%] xl:-top-[290%] -right-[10%] sm:-right-[50%] size-[708px] pointer-events-none group-hover:opacity-100 transition-opacity duration-300 opacity-0 select-none">
                 <img src="images/gradient/gradient-23.png" alt="gradient" />
               </div>
+
               <button
                 onClick={() => toggleAccordion(index)}
                 className="accordion-action flex items-center cursor-pointer justify-between sm:pt-8 pt-5 sm:pb-8 pb-5 w-full"
@@ -74,6 +129,7 @@ const FaqSection: React.FC = () => {
                 <span className="flex-1 text-left sm:text-heading-6 text-tagline-1 font-normal text-secondary dark:text-accent">
                   {item.question}
                 </span>
+
                 <span className="sm:ml-auto ml-2.5 block accordion-arrow">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,6 +138,13 @@ const FaqSection: React.FC = () => {
                     stroke="currentColor"
                     width="16"
                     height="16"
+                    style={{
+                      transform:
+                        activeIndex === index
+                          ? "rotate(180deg)"
+                          : "rotate(0deg)",
+                      transition: "0.3s ease",
+                    }}
                   >
                     <path
                       strokeOpacity={0.8}
@@ -94,13 +157,16 @@ const FaqSection: React.FC = () => {
                   </svg>
                 </span>
               </button>
-              {activeIndex === index && (
-                <div className="accordion-content">
-                  <div className="border-t border-t-stroke-2 dark:border-t-stroke-6 sm:pt-6 pt-5 sm:pb-8 pb-5">
-                    <p>{item.answer}</p>
-                  </div>
+
+              <div
+                className="accordion-content overflow-hidden"
+                ref={(el: null) => (contentRefs.current[index] = el!)}
+                style={{ height: activeIndex === index ? "auto" : "0px" }}
+              >
+                <div className="border-t border-t-stroke-2 dark:border-t-stroke-6 sm:pt-6 pt-5 sm:pb-8 pb-5">
+                  <p>{item.answer}</p>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>

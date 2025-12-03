@@ -1,16 +1,39 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSidebarAnimation } from "../../hooks/useSidebarAnimation";
 const navItems = [
-
   { name: "Home", href: "#" },
   { name: "Features", href: "#features" },
   { name: "How it Works", href: "#hiw" },
   { name: "Pricing", href: "#pricing" },
   { name: "FAQ", href: "#faq" },
   { name: "Contact", href: "#contact" },
-
 ];
 
 export default function GlobalHeader() {
+  useEffect(() => {
+    const header = document.querySelector(".header-one") as HTMLElement | null;
+
+    if (!header) return;
+
+    const onScroll = () => {
+      if (window.scrollY > 100) {
+        header.style.transition = "all 0.5s ease-in-out";
+        header.classList.add("scroll-header");
+      } else {
+        header.classList.remove("scroll-header");
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  useSidebarAnimation();
+
   return (
     <header>
       <div

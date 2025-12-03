@@ -1,17 +1,12 @@
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-// Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Initialize animation for elements using data attributes.
- */
 export const initRevealElements = (): void => {
   const elements = document.querySelectorAll<HTMLElement>("[data-ns-animate]");
 
-  // Springer might come from a window-injected script
-  const Springer: any = (window as any)?.Springer?.default;
+  const Springer: Function = (window as unknown as {Springer:{default:Function}})?.Springer?.default;
 
   elements.forEach((elem: HTMLElement) => {
     const duration = parseFloat(elem.getAttribute("data-duration") || "0.6");
@@ -32,11 +27,9 @@ export const initRevealElements = (): void => {
 
     const rotation = parseFloat(elem.getAttribute("data-rotation") || "0");
 
-    // Initial styles
     elem.style.opacity = "1";
     elem.style.filter = "blur(0)";
 
-    // Animation config
     const animationProps: gsap.TweenVars = {
       duration,
       delay,
