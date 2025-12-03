@@ -1,5 +1,5 @@
 {
-  "name": "isara",
+  "name": "react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
+    "gsap": "^3.13.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.10.0"
+    "react-router-dom": "^7.9.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

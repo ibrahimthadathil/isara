@@ -1,5 +1,5 @@
 import HeroContainer from "../components/global/heroContainer";
-import TermsContentSection from "../components/page-section/terms/termsContent";
+import TermsContentSection from "../components/page-sections/terms/termsContent";
 
 const Terms = () => {
   return (

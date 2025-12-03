@@ -1,12 +1,12 @@
-import ContactSection from "../components/page-section/home/cta";
-import Ecosystem from "../components/page-section/home/ecosystem";
-import FaqSection from "../components/page-section/home/faq";
-import FeaturesSection from "../components/page-section/home/features";
-import HeroSection from "../components/page-section/home/hero";
-import HowItWorks from "../components/page-section/home/howitwork";
-import PartnersSection from "../components/page-section/home/partenrs";
-import Pricing from "../components/page-section/home/pricing";
-import Testimonials from "../components/page-section/home/testimonials";
+import Ecosystem from "../components/page-sections/home/ecosystem";
+import FeaturesSection from "../components/page-sections/home/features";
+import HeroSection from "../components/page-sections/home/hero";
+import HowItWorks from "../components/page-sections/home/howitwork";
+import Testimonials from "../components/page-sections/home/testimonials";
+import Pricing from "../components/page-sections/home/pricing";
+import FaqSection from "../components/page-sections/home/faq";
+import PartnersSection from "../components/page-sections/home/partenrs";
+import ContactSection from "../components/page-sections/home/cta";
 
 const Home = () => {
   return (

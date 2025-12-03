@@ -2482,7 +2482,7 @@ function init() {
 
   if (typeof window !== "undefined") {
     console.log("window is defined initRevealElements ✅✅✅");
-    initRevealElements();
+    // initRevealElements();
   }
   let lenis;
   const smoothScrolling = () => {
