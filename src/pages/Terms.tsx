@@ -1,10 +1,13 @@
+import HeroContainer from "../components/global/heroContainer";
+import TermsContentSection from "../components/page-section/terms/termsContent";
 
 const Terms = () => {
   return (
-    <div>
-      term
+    <div className="bg-background-3">
+      <HeroContainer title="Terms & Conditions" />
+      <TermsContentSection />
     </div>
-  )
-}
+  );
+};
 
-export default Terms
+export default Terms;
